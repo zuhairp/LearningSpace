@@ -24,6 +24,7 @@
     "webpack": "^1.13.3"
   },
   "dependencies": {
-    "aframe": "^0.3.2"
+    "aframe": "^0.3.2",
+    "superagent": "^2.3.0"
   }
 }
