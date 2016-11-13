@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "aframe": "^0.3.2",
+    "aframe-mountain-component": "^0.3.2",
     "aframe-react": "^3.4.0",
     "aframe-text-component": "^0.3.0",
     "lodash": "^4.16.6",
