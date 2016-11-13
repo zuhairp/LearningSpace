@@ -23,6 +23,7 @@ class VRSecheltScene extends React.Component {
       <Scene>
         <Flashcard position={[0,1,-2]} text={"Hello, World!"} scale={0.5} color={this.state.color}/>
         <Sky src="url(https://rawgit.com/aframevr/assets/gh-pages/360-image-gallery-boilerplate/img/sechelt.jpg)"/>
+        <Entity geometry='primitive: plane' material={{color: 'blue'}} position="-10 0 0" sound='src: url(nightTime.mp3); autoplay: true; loop: true' />=
       </Scene>
     );
   }
