@@ -1,39 +1,28 @@
-import 'aframe';
-import {Entity, Scene} from  'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Flashcard from './components/Flashcard';
+import VRScene from './scenes/VRScene';
 
-class VRScene extends React.Component {
+class Application extends React.Component {
   constructor(props){
     super(props);
-    this.state = {color: 'red'};
-
-    this.recognition = new webkitSpeechRecognition()
-    this.recognition.continuous = true;
-    this.recognition.interimResults = false;
-    this.recognition.start();
-
-    this.recognition.onresult = event => {
-      const { resultIndex, results } = event;
-      const transcript = (event.results[resultIndex][0].transcript);
-      this.setState({color: transcript});
-    }
+    this.state = {page: 'vr'};
   }
 
   componentWillUnmount(){
-    this.recognition.stop();
   }
 
   render () {
-    return (
-      <Scene>
-        <Flashcard position={[0,1,-2]} text={"Hello, World!"} scale={0.5} color={this.state.color}/>
-      </Scene>
-    );
+    if (this.state.page === 'options'){
+
+    }
+    else if (this.state.page === 'vr'){
+      return (
+        <VRScene />
+      );
+    }
   }
   
 }
 
-ReactDOM.render(<VRScene />, document.querySelector('.scene-container'));
+ReactDOM.render(<Application />, document.querySelector('.scene-container'));
