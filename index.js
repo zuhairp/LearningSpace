@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import OptionsScreen from './scenes/OptionsScreen';
 import VRScene from './scenes/VRScene';
+import VRMountainScene from './scenes/VRMountainScene';
 
 class Application extends React.Component {
   constructor(props){
@@ -22,7 +23,7 @@ class Application extends React.Component {
     }
     else if (this.state.page === 'vr'){
       return (
-        <VRScene />
+        <VRMountainScene />
       );
     }
   }
