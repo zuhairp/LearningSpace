@@ -9,13 +9,21 @@ class VRScene extends React.Component {
   constructor(props){
     super(props);
     this.state = {color: 'red'};
+
+    this.recognition = new webkitSpeechRecognition()
+    this.recognition.continuous = true;
+    this.recognition.interimResults = false;
+    this.recognition.start();
+
+    this.recognition.onresult = event => {
+      const { resultIndex, results } = event;
+      const transcript = (event.results[resultIndex][0].transcript);
+      this.setState({color: transcript});
+    }
   }
 
-  changeColor() {
-   const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-    this.setState({
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });  
+  componentWillUnmount(){
+    this.recognition.stop();
   }
 
   render () {
