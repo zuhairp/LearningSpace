@@ -1,28 +1,80 @@
 import React from 'react';
 
+import Button  from 'react-bootstrap/lib/Button';
+
+import Grid from 'react-bootstrap/lib/Grid';
+import Row  from 'react-bootstrap/lib/Row';
+import Col  from 'react-bootstrap/lib/Col';
+
+import ValidatedTextBox from '../components/utils/ValidatedTextBox';
+
+import getFlashcards from '../utils/flashcards';
+
+const _ = require("lodash");
+
 class OptionsScreen extends React.Component {
   constructor(props){
     super(props);
     this.props = props;
 
-    const options = { quizlet_set: '161816048' }
+    const options = {
+      quizlet_set: { value: '161816048',  valid: 'success'},
+    }
     this.state = { options }
+    this.quizletIdChanged = _.debounce(this.quizletIdChanged.bind(this), 250);
   }
 
   changeHandler(key){
-    return event => {
-      console.log('Hi there!');
-      const options = {...this.state.options, [key]: event.target.value } 
+    return value => {
+      const options = {...this.state.options, [key]: value } 
       this.setState({options});
     }
   }
 
+  quizletIdChanged(value){
+    console.log('hey there!');
+    getFlashcards(value)
+    .then(response => {
+      const options = {...this.state.options, quizlet_set: { value, msg: '', valid: 'success' } } 
+      console.log(options);
+      this.setState({options});
+    })
+    .catch(error => {
+      const options = {...this.state.options, quizlet_set: { value, msg: error.message, valid: 'error' } } 
+      console.error(options);
+      this.setState({options});
+    })
+  }
+
+  onButtonClick(){
+    this.props.optionsChanged(this.state.options);
+  }
+
   render () {
     return (
-      <div>
-        <input type="text" value={this.state.options.quizlet_set} onChange={this.changeHandler('quizlet_set')}/> 
-        <button onClick={e => this.props.optionsChanged(this.state.options)}> Let's Start</button>
-      </div>
+      <Grid fluid>
+        <Row>
+          <Col md={6} mdOffset={3}><h1 className="center-block"> LearningSpace </h1></Col>
+        </Row>
+        <Row>
+          <Col md={6} mdOffset={3}>
+            <ValidatedTextBox 
+              controlId="quizletId"
+              validationState={this.state.options.quizlet_set.valid}
+              label="Quizlet Set ID"
+              value={this.state.options.quizlet_set.value}
+              onChange={this.quizletIdChanged}
+              helpText={this.state.options.quizlet_set.msg}
+              />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} mdOffset={3}>
+            <Button bsStyle="primary" onClick={this.onButtonClick.bind(this)} 
+              disabled={ this.state.options.quizlet_set.msg !== '' || this.state.options.quizlet_set.value === ''}>Let's Get Started!</Button>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
   

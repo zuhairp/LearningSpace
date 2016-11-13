@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import OptionsScreen from './scenes/OptionsScreen';
 import VRScene from './scenes/VRScene';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 class Application extends React.Component {
   constructor(props){
     super(props);
     this.state = {page: 'options'};
+    injectTapEventPlugin();
   }
 
   optionsChanged(options){
@@ -29,4 +33,10 @@ class Application extends React.Component {
   
 }
 
-ReactDOM.render(<Application />, document.querySelector('.scene-container'));
+const App = () => (
+  <MuiThemeProvider>
+    <Application />
+  </MuiThemeProvider>
+)
+
+ReactDOM.render(<App />, document.querySelector('.scene-container'));
