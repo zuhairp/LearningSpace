@@ -8,6 +8,8 @@ import VRMountainScene from './scenes/VRMountainScene';
 
 import getFlashcards from './utils/flashcards';
 
+import aframe from 'aframe';
+
 class Application extends React.Component {
   constructor(props){
     super(props);
@@ -31,17 +33,21 @@ class Application extends React.Component {
     }
     else if (this.state.page === 'vr'){
       return (
-        <VRScene sceneIndex={this.state.index} />
+        <VRScene sceneIndex={this.state.index} terms={this.state.terms}/>
       );
     }
   }
   
 }
+    
+aframe.registerComponent('update-raycaster', {
+  schema: {type: 'selector'},
 
-const App = () => (
-  <MuiThemeProvider>
-    <Application />
-  </MuiThemeProvider>
-)
+  init: function () {
+    console.log("HEY! IN HERE!");
+    var raycasterEl = this.data;
+    raycasterEl.components.raycaster.refreshObjects();
+  }
+});
 
-ReactDOM.render(<App />, document.querySelector('.scene-container'));
+ReactDOM.render(<Application />, document.querySelector('.scene-container'));
