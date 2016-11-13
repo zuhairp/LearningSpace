@@ -1,6 +1,9 @@
 import React from 'react';
 
 import Button  from 'react-bootstrap/lib/Button';
+import DropdownButton from 'react-bootstrap/lib/DropdownButton';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Row  from 'react-bootstrap/lib/Row';
@@ -17,18 +20,19 @@ class OptionsScreen extends React.Component {
     super(props);
     this.props = props;
 
+    this.scene_options = ['Mountain', 'City', 'MLH Prime'];
+
     const options = {
       quizlet_set: { value: '161816048',  valid: 'success'},
+      selected_scene_index: 0,
     }
     this.state = { options }
     this.quizletIdChanged = _.debounce(this.quizletIdChanged.bind(this), 250);
   }
 
-  changeHandler(key){
-    return value => {
-      const options = {...this.state.options, [key]: value } 
-      this.setState({options});
-    }
+  sceneSelected(key, value){
+    const options = { ...this.state.options, selected_scene_index: key }
+    this.setState({options});
   }
 
   quizletIdChanged(value){
@@ -66,6 +70,26 @@ class OptionsScreen extends React.Component {
               onChange={this.quizletIdChanged}
               helpText={this.state.options.quizlet_set.msg}
               />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} mdOffset={3}>
+            <DropdownButton 
+              onSelect={this.sceneSelected.bind(this)} 
+              bsStyle="default" 
+              title={this.scene_options[this.state.options.selected_scene_index]} 
+              id="sceneSelector"
+            >
+            {
+              this.scene_options.map((name, index) => {
+                return (<MenuItem 
+                  eventKey={index} 
+                  active={ this.state.options.selected_scene_index === index}>
+                  {name}
+                </MenuItem>)
+              })
+            } 
+            </DropdownButton>
           </Col>
         </Row>
         <Row>

@@ -6,19 +6,23 @@ import OptionsScreen from './scenes/OptionsScreen';
 import VRScene from './scenes/VRScene';
 import VRMountainScene from './scenes/VRMountainScene';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import getFlashcards from './utils/flashcards';
 
 class Application extends React.Component {
   constructor(props){
     super(props);
-    this.state = {page: 'options'};
-    injectTapEventPlugin();
+    this.state = {terms: [], page: 'options'};
   }
 
   optionsChanged(options){
     console.log(options);
-    this.setState({options: options});
-    this.setState({page: 'vr'});
+    this.setState({index: options.selected_scene_index});
+    getFlashcards(options.quizlet_set.value)
+    .then(response => {
+        console.log("RESPONSE");
+        console.log(response);
+        this.setState({terms: response, page: 'vr'});
+    })
   }
 
   render () {
@@ -27,7 +31,7 @@ class Application extends React.Component {
     }
     else if (this.state.page === 'vr'){
       return (
-        <VRMountainScene />
+        <VRScene sceneIndex={this.state.index} />
       );
     }
   }
