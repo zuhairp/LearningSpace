@@ -4,6 +4,7 @@ import React from 'react';
 
 import VRMountainScene from './VRMountainScene'
 import VRSecheltScene from './VRSecheltScene'
+import VRBasilicaScene from './VRBasilicaScene'
 
 class VRScene extends React.Component {
   constructor(props){
@@ -28,6 +29,7 @@ class VRScene extends React.Component {
     switch(sceneIndex){
         case 0: return <VRMountainScene terms={terms} />
         case 1: return <VRSecheltScene terms={terms} />
+        case 2: return <VRBasilicaScene terms={terms}/>
         default: console.error("Uknown scene index"); return;
     }
   }
