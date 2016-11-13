@@ -18,12 +18,12 @@ class VRMountainScene extends React.Component {
     
   render () {
   // visually creates the scene
-        // <!-- can't seem to get a color for this because it's a primitive & not an entity -->
     return (
       <Scene>
         <Flashcard position={[0,1,-2]} text={"Hello, World!"} scale={0.5} color={this.state.color}/>
         <Entity mountain={{color: '#A0522D'}}/>
         <Entity primitive='a-sky' material={{color: 'blue'}} onClick={() => { console.log('Clicked!'); }}/>
+        <Entity geometry='primitive: plane' material={{color: 'blue'}} position="-10 0 0" sound='src: url(bird.mp3); autoplay: true; loop: true' />=
       </Scene>
     );
   }
