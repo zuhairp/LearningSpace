@@ -3,6 +3,7 @@ import {Entity, Scene} from  'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Flashcard from './components/Flashcard';
 
 class VRScene extends React.Component {
   constructor(props){
@@ -20,8 +21,7 @@ class VRScene extends React.Component {
   render () {
     return (
       <Scene>
-        <Entity geometry={{primitive: 'box'}} material="color: red" position={[0, 1, -4]}/>
-        <Text text='Hello World!' color="purple" position={[-1.75, 1, -1]} />
+        <Flashcard position={[0,1,-2]} text={"Hello, World!"} scale={0.5} color={this.state.color}/>
       </Scene>
     );
   }
