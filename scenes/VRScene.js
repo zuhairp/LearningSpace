@@ -3,6 +3,7 @@ import {Entity, Scene} from  'aframe-react';
 import React from 'react';
 
 import VRMountainScene from './VRMountainScene'
+import VRSecheltScene from './VRSecheltScene'
 
 class VRScene extends React.Component {
   constructor(props){
@@ -23,8 +24,10 @@ class VRScene extends React.Component {
   render () {
     const { terms, sceneIndex } = this.props;
 
+    /* Jessse --> Add Case statement with index of your scene, and return the DOM element */
     switch(sceneIndex){
         case 0: return <VRMountainScene terms={terms} />
+        case 1: return <VRSecheltScene terms={terms} />
         default: console.error("Uknown scene index"); return;
     }
   }

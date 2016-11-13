@@ -20,7 +20,8 @@ class OptionsScreen extends React.Component {
     super(props);
     this.props = props;
 
-    this.scene_options = ['Mountain', 'City', 'MLH Prime'];
+    /* Jesse --> add name of scene here */
+    this.scene_options = ['Mountain', 'Sechelt'];
 
     const options = {
       quizlet_set: { value: '161816048',  valid: 'success'},

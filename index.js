@@ -4,7 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import OptionsScreen from './scenes/OptionsScreen';
 import VRScene from './scenes/VRScene';
-import VRMountainScene from './scenes/VRMountainScene';
 
 import getFlashcards from './utils/flashcards';
 
