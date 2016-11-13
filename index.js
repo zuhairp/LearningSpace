@@ -3,6 +3,8 @@ import {Entity, Scene} from  'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Text from './components/Text';
+
 class VRScene extends React.Component {
   constructor(props){
     super(props);
@@ -19,7 +21,8 @@ class VRScene extends React.Component {
   render () {
     return (
       <Scene>
-        <Entity geometry={{primitive: 'box'}} material="color: red" position={[0, 1, -1]}/>
+        <Entity geometry={{primitive: 'box'}} material="color: red" position={[0, 1, -4]}/>
+        <Text text='Hello World!' color="purple" position={[-1.75, 1, -1]} />
       </Scene>
     );
   }
